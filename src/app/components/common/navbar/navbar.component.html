@@ -1,0 +1,61 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-brand">
+      <a routerLink="/" class="logo">NoJokeRecipes</a>
+      <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div class="navbar-menu" [class.is-active]="isMenuOpen">
+      <div class="navbar-start">
+        <a routerLink="/recipes" routerLinkActive="active" class="navbar-item">Recipes</a>
+        <a routerLink="/categories" routerLinkActive="active" class="navbar-item">Categories</a>
+        <a routerLink="/about" routerLinkActive="active" class="navbar-item">About</a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="search-container">
+          <input type="text" placeholder="Search recipes..." class="search-input">
+          <button type="submit" class="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+
+        <ng-container *ngIf="!authService.isLoggedIn(); else loggedInTemplate">
+          <a routerLink="/login" class="navbar-item auth-button login-btn">Log In</a>
+          <a routerLink="/signup" class="navbar-item auth-button signup-btn">Sign Up</a>
+        </ng-container>
+
+        <ng-template #loggedInTemplate>
+          <div class="user-menu">
+            <button class="user-button">
+              <span class="user-avatar">
+                <i class="fas fa-user"></i>
+              </span>
+              <span class="user-name">{{ authService.getCurrentUser()?.name }}</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a routerLink="/dashboard" class="dropdown-item">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+              </a>
+              <a routerLink="/profile" class="dropdown-item">
+                <i class="fas fa-user-circle"></i> Profile
+              </a>
+              <a routerLink="/favorites" class="dropdown-item">
+                <i class="fas fa-heart"></i> Favorites
+              </a>
+              <hr class="dropdown-divider">
+              <a (click)="logout()" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+              </a>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</nav>
