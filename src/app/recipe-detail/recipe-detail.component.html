@@ -1,12 +1,11 @@
 <!-- src/app/recipe-detail/recipe-detail.component.html -->
-<div class="back-nav">
-  <a [routerLink]="['/recipes']" class="back-button">
-    ← Back to Recipes
-  </a>
-</div>
-
 <div *ngIf="recipe" class="recipe-container">
   <div class="recipe-header">
+    <div class="back-nav">
+      <a [routerLink]="['/recipes']" class="back-button">
+        ← Back to Recipes
+      </a>
+    </div>
     <h1>{{ recipe.title }}</h1>
     <p>{{ recipe.description }}</p>
   </div>
@@ -36,7 +35,7 @@
     </section>
 
     <section class="child-recipes-section" *ngIf="recipe.childRecipes && recipe.childRecipes.length > 0">
-      <h2>Component Recipes</h2>
+      <h2>Related Recipes</h2>
       <div class="child-recipes">
         <div *ngFor="let child of recipe.childRecipes" class="child-recipe">
           <h3>{{ child.title }}</h3>
@@ -65,7 +64,7 @@
     </section>
 
     <section *ngIf="!recipe.childRecipes || recipe.childRecipes.length === 0">
-      <h2>Component Recipes</h2>
+      <h2>Related Recipes</h2>
       <p class="no-child-recipes">No component recipes required</p>
     </section>
   </div>
