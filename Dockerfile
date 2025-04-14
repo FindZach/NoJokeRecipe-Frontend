@@ -3,9 +3,9 @@ FROM node:20-slim AS builder
 
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy package files and install all dependencies (including devDependencies for ng build)
 COPY package*.json ./
-RUN npm install --omit=dev
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
@@ -29,5 +29,4 @@ RUN npm install --omit=dev --ignore-scripts
 EXPOSE 4000
 
 # Command to start the SSR server
-RUN npm run serve:ssr:nojokerecipe-frontend
-
+CMD ["npm", "run", "serve:ssr:nojokerecipe-frontend"]
