@@ -1,0 +1,101 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>Create Your Account</h2>
+      <p>Join NoJokeRecipes to discover and save delicious recipes</p>
+    </div>
+
+    <div class="auth-body">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="Enter your full name"
+            [class.is-invalid]="isInvalid('name')"
+          >
+          <div class="error-message" *ngIf="hasError('name', 'required') || hasError('name', 'minlength')">
+            <span *ngIf="hasError('name', 'required')">Name is required</span>
+            <span *ngIf="hasError('name', 'minlength')">Name must be at least 2 characters</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="Enter your email"
+            [class.is-invalid]="isInvalid('email')"
+          >
+          <div class="error-message" *ngIf="hasError('email', 'required') || hasError('email', 'email')">
+            <span *ngIf="hasError('email', 'required')">Email is required</span>
+            <span *ngIf="hasError('email', 'email')">Please enter a valid email</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="Create a password"
+            [class.is-invalid]="isInvalid('password')"
+          >
+          <div class="error-message" *ngIf="hasError('password', 'required') || hasError('password', 'minlength')">
+            <span *ngIf="hasError('password', 'required')">Password is required</span>
+            <span *ngIf="hasError('password', 'minlength')">Password must be at least 6 characters</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="Confirm your password"
+            [class.is-invalid]="isInvalid('confirmPassword')"
+          >
+          <div class="error-message" *ngIf="hasError('confirmPassword', 'required') || hasError('confirmPassword', 'passwordMismatch')">
+            <span *ngIf="hasError('confirmPassword', 'required')">Please confirm your password</span>
+            <span *ngIf="hasError('confirmPassword', 'passwordMismatch')">Passwords do not match</span>
+          </div>
+        </div>
+
+        <div class="form-terms">
+          <p>By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+        </div>
+
+        <div class="error-alert" *ngIf="error">
+          {{ error }}
+        </div>
+
+        <button type="submit" class="auth-button" [disabled]="signupForm.invalid || loading">
+          <span *ngIf="loading">
+            <i class="fas fa-spinner fa-spin"></i> Creating account...
+          </span>
+          <span *ngIf="!loading">Create Account</span>
+        </button>
+      </form>
+
+      <div class="auth-divider">
+        <span>OR</span>
+      </div>
+
+      <div class="social-auth">
+        <button class="google-btn">
+          <i class="fab fa-google"></i> Continue with Google
+        </button>
+      </div>
+    </div>
+
+    <div class="auth-footer">
+      <p>Already have an account? <a routerLink="/login">Log In</a></p>
+    </div>
+  </div>
+</div>
