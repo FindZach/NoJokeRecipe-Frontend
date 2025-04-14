@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Recipe } from '../models/recipe/recipe.models';
+import {environment} from '../../environments/environment';
 
 export interface PaginatedResponse<T> {
   items: T[];
@@ -15,9 +16,7 @@ export interface PaginatedResponse<T> {
   providedIn: 'root'
 })
 export class RecipeService {
-  private apiUrl = typeof process !== 'undefined' && process.env['API_URL']
-    ? `${process.env['API_URL']}/recipes`
-    : 'https://backend.nojokerecipes.com/recipes';
+  private apiUrl = environment.apiUrl + '/recipes';
 
   constructor(private http: HttpClient) {}
 
