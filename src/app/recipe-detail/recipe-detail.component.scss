@@ -338,3 +338,47 @@
     }
   }
 }
+
+.back-nav {
+  background-color: #f5f5f5;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background-color: var(--secondary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .arrow {
+      font-size: 1.2rem;
+      margin-right: 8px;
+    }
+  }
+}
+
+/* Adjust the recipe container's top margin to account for the button */
+.recipe-container {
+  margin-top: 0;
+}
