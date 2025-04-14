@@ -1,15 +1,23 @@
+<!-- src/app/recipe-list/recipe-list.component.html -->
 <div class="recipe-list-container">
-  <h1>Recipes</h1>
-  <div *ngIf="recipes.length > 0; else noRecipes">
-    <ul>
-      <li *ngFor="let recipe of recipes">
-        <a [routerLink]="['/recipes', recipe.slug]">{{ recipe.title }}</a>
+  <h1>Our Recipes</h1>
+
+  <div *ngIf="recipes.length > 0; else noRecipes" class="recipes-grid">
+    <div *ngFor="let recipe of recipes" class="recipe-card card">
+      <div class="recipe-image"></div>
+      <div class="recipe-content">
+        <h2>{{ recipe.title }}</h2>
         <p>{{ recipe.description }}</p>
-      </li>
-    </ul>
+        <a [routerLink]="['/recipes', recipe.slug]" class="view-recipe">View Recipe</a>
+      </div>
+    </div>
   </div>
+
   <ng-template #noRecipes>
-    <p>No recipes available.</p>
+    <div class="no-recipes">
+      <p>No recipes available at the moment.</p>
+    </div>
   </ng-template>
+
   <div *ngIf="error" class="error">{{ error }}</div>
 </div>

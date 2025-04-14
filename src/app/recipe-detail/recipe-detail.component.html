@@ -1,45 +1,64 @@
+<!-- src/app/recipe-detail/recipe-detail.component.html -->
 <div *ngIf="recipe" class="recipe-container">
-  <h1>NoJokeRecipe: {{ recipe.title }}</h1>
-  <p>{{ recipe.description }}</p>
+  <div class="recipe-header">
+    <h1>{{ recipe.title }}</h1>
+    <p>{{ recipe.description }}</p>
+  </div>
 
-  <h2>Ingredients</h2>
-  <ul>
-    <li *ngFor="let ingredient of recipe.ingredients">
-      {{ ingredient.quantity }} {{ ingredient.name }}
-    </li>
-  </ul>
-
-  <h2>Steps</h2>
-  <ol>
-    <li *ngFor="let step of recipe.steps">
-      {{ step.instruction }}
-      <img *ngIf="step.imageUrl != null && step.imageUrl !== ''" [src]="step.imageUrl" [alt]="'Step ' + (step.stepNumber)" />
-    </li>
-  </ol>
-
-  <h2>Child Recipes</h2>
-  <div *ngIf="recipe.childRecipes && recipe.childRecipes.length > 0">
-    <div *ngFor="let child of recipe.childRecipes" class="child-recipe">
-      <h3>{{ child.title }}</h3>
-      <p>{{ child.description }}</p>
-      <h4>Ingredients</h4>
-      <ul>
-        <li *ngFor="let ingredient of child.ingredients">
-          {{ ingredient.quantity }} {{ ingredient.name }}
+  <div class="recipe-content">
+    <section class="ingredients-section">
+      <h2>Ingredients</h2>
+      <ul class="ingredients-list">
+        <li *ngFor="let ingredient of recipe.ingredients">
+          <span class="quantity">{{ ingredient.quantity }}</span>
+          <span class="name">{{ ingredient.name }}</span>
         </li>
       </ul>
-      <h4>Steps</h4>
-      <ol>
-        <li *ngFor="let step of child.steps">
+    </section>
+
+    <section class="steps-section">
+      <h2>Instructions</h2>
+      <ol class="steps-list">
+        <li *ngFor="let step of recipe.steps">
           {{ step.instruction }}
           <img *ngIf="step.imageUrl != null && step.imageUrl !== ''" [src]="step.imageUrl" [alt]="'Step ' + (step.stepNumber)" />
         </li>
       </ol>
-    </div>
-  </div>
-  <p *ngIf="!recipe.childRecipes || recipe.childRecipes.length === 0">No child recipes needed</p>
+    </section>
 
-  <!-- Debug output -->
+    <section class="child-recipes-section" *ngIf="recipe.childRecipes && recipe.childRecipes.length > 0">
+      <h2>Component Recipes</h2>
+      <div class="child-recipes">
+        <div *ngFor="let child of recipe.childRecipes" class="child-recipe">
+          <h3>{{ child.title }}</h3>
+          <p>{{ child.description }}</p>
+
+          <h4>Ingredients</h4>
+          <ul>
+            <li *ngFor="let ingredient of child.ingredients">
+              <span class="quantity">{{ ingredient.quantity }}</span>
+              <span class="name">{{ ingredient.name }}</span>
+            </li>
+          </ul>
+
+          <h4>Instructions</h4>
+          <ol>
+            <li *ngFor="let step of child.steps">
+              {{ step.instruction }}
+              <img *ngIf="step.imageUrl != null && step.imageUrl !== ''" [src]="step.imageUrl" [alt]="'Step ' + (step.stepNumber)" />
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section *ngIf="!recipe.childRecipes || recipe.childRecipes.length === 0">
+      <h2>Component Recipes</h2>
+      <p class="no-child-recipes">No component recipes required</p>
+    </section>
+  </div>
+
+  <!-- Debug output - hidden with CSS -->
   <div class="debug">
     <h3>Debug Information</h3>
     <p>Number of Steps: {{ recipe.steps.length }}</p>
@@ -48,5 +67,11 @@
     <pre>Child Recipes: {{ recipe.childRecipes | json }}</pre>
   </div>
 </div>
-<div *ngIf="!recipe && !error">Loading recipe...</div>
-<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="!recipe && !error" class="loading">
+  <p>Loading recipe...</p>
+</div>
+
+<div *ngIf="error" class="error">
+  <p>{{ error }}</p>
+</div>
