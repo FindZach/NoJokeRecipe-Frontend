@@ -1,0 +1,127 @@
+<!-- src/app/recipe-list/recipe-list.component.html -->
+<div class="recipe-list-container">
+  <div class="search-filter-bar">
+    <div class="search-box">
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (keyup)="onSearch()"
+        placeholder="Search recipes..."
+        class="search-input"
+      >
+      <button class="search-button" (click)="onSearch()">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+
+    <div class="sort-options">
+      <label for="sort">Sort by:</label>
+      <select id="sort" [(ngModel)]="sortOption" (change)="onSortChange()">
+        <option value="newest">Newest</option>
+        <option value="popular">Most Popular</option>
+        <option value="az">A-Z</option>
+        <option value="za">Z-A</option>
+      </select>
+    </div>
+  </div>
+
+  <h1>Our Recipes</h1>
+
+  <div *ngIf="searchQuery" class="search-results-info">
+    <p>{{ totalItems }} results for "{{ searchQuery }}"</p>
+    <button class="clear-search" (click)="searchQuery = ''; onSearch()">
+      <i class="fas fa-times"></i> Clear search
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading-recipes">
+    <i class="fas fa-spinner fa-spin"></i>
+    <p>Loading recipes...</p>
+  </div>
+
+  <div *ngIf="!loading && recipes.length > 0" class="recipes-grid">
+    <div *ngFor="let recipe of recipes" class="recipe-card card">
+      <div class="recipe-image"></div>
+      <div class="recipe-content">
+        <h2>{{ recipe.title }}</h2>
+        <p>{{ recipe.description }}</p>
+        <a [routerLink]="['/recipes', recipe.slug]" class="view-recipe">View Recipe</a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && recipes.length === 0" class="no-recipes">
+    <div *ngIf="searchQuery; else noRecipesDefault">
+      <i class="fas fa-search"></i>
+      <p>No recipes found matching "{{ searchQuery }}"</p>
+      <button class="clear-search-button" (click)="searchQuery = ''; onSearch()">
+        Clear search and show all recipes
+      </button>
+    </div>
+
+    <ng-template #noRecipesDefault>
+      <i class="fas fa-utensils"></i>
+      <p>No recipes available at the moment.</p>
+    </ng-template>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <i class="fas fa-exclamation-triangle"></i>
+    <p>{{ error }}</p>
+  </div>
+
+  <!-- Pagination controls -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button
+      class="page-button prev"
+      [disabled]="currentPage === 1"
+      (click)="gotoPage(currentPage - 1)"
+    >
+      <i class="fas fa-chevron-left"></i> Previous
+    </button>
+
+    <div class="page-numbers">
+      <!-- First page button -->
+      <button
+        *ngIf="!pages.includes(1)"
+        class="page-number"
+        (click)="gotoPage(1)"
+      >
+        1
+      </button>
+
+      <!-- Ellipsis if needed -->
+      <span *ngIf="!pages.includes(1) && !pages.includes(2)" class="ellipsis">...</span>
+
+      <!-- Page numbers -->
+      <button
+        *ngFor="let page of pages"
+        class="page-number"
+        [class.active]="page === currentPage"
+        (click)="gotoPage(page)"
+      >
+        {{ page }}
+      </button>
+
+      <!-- Ellipsis if needed -->
+      <span *ngIf="!pages.includes(totalPages) && !pages.includes(totalPages - 1)" class="ellipsis">...</span>
+
+      <!-- Last page button -->
+      <button
+        *ngIf="!pages.includes(totalPages) && totalPages > 1"
+        class="page-number"
+        (click)="gotoPage(totalPages)"
+      >
+        {{ totalPages }}
+      </button>
+    </div>
+
+    <button
+      class="page-button next"
+      [disabled]="currentPage === totalPages"
+      (click)="gotoPage(currentPage + 1)"
+    >
+      Next <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
