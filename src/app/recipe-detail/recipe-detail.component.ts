@@ -50,16 +50,16 @@ export class RecipeDetailComponent implements OnInit {
   private updateMetaTags(): void {
     if (this.recipe) {
       // Update the <title> tag
-      this.titleService.setTitle(`${this.recipe.title} | NoJokeRecipe`);
+      this.titleService.setTitle(`${this.recipe.title} | NoJokeRecipes`);
 
       // Update meta tags (both server and client side)
       this.meta.updateTag({ name: 'description', content: this.recipe.description });
-      this.meta.updateTag({ name: 'keywords', content: `${this.recipe.title}, NoJokeRecipe, recipe, cooking` });
-      this.meta.updateTag({ property: 'og:title', content: `NoJokeRecipe: ${this.recipe.title}` });
+      this.meta.updateTag({ name: 'keywords', content: `${this.recipe.title}, NoJokeRecipes, recipe, cooking` });
+      this.meta.updateTag({ property: 'og:title', content: `NoJokeRecipes: ${this.recipe.title}` });
       this.meta.updateTag({ property: 'og:description', content: this.recipe.description });
       this.meta.updateTag({ property: 'og:type', content: 'recipe' });
       this.meta.updateTag({ property: 'og:url', content: `http://localhost:4000${this.router.url}` }); // Dynamic URL
-      this.meta.updateTag({ property: 'og:site_name', content: 'NoJokeRecipe' });
+      this.meta.updateTag({ property: 'og:site_name', content: 'NoJokeRecipes' });
 
       // Add og:image (use a default image or a recipe-specific image)
       const imageUrl = this.recipe.steps?.find(step => step.imageUrl)?.imageUrl || 'https://placehold.co/600x400?text=Recipe+Image';

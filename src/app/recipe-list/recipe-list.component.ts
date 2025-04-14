@@ -23,14 +23,14 @@ export class RecipeListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.titleService.setTitle('NoJokeRecipe: All Recipes');
-    this.meta.updateTag({ name: 'description', content: 'Browse all recipes on NoJokeRecipe, your go-to source for serious recipes.' });
-    this.meta.updateTag({ name: 'keywords', content: 'recipes, NoJokeRecipe, cooking' });
-    this.meta.updateTag({ property: 'og:title', content: 'NoJokeRecipe: All Recipes' });
-    this.meta.updateTag({ property: 'og:description', content: 'Browse all recipes on NoJokeRecipe, your go-to source for serious recipes.' });
+    this.titleService.setTitle('NoJokeRecipes: All Recipes');
+    this.meta.updateTag({ name: 'description', content: 'Browse all recipes on NoJokeRecipes, your go-to source for serious recipes.' });
+    this.meta.updateTag({ name: 'keywords', content: 'recipes, NoJokeRecipes, cooking' });
+    this.meta.updateTag({ property: 'og:title', content: 'NoJokeRecipes: All Recipes' });
+    this.meta.updateTag({ property: 'og:description', content: 'Browse all recipes on NoJokeRecipes, your go-to source for serious recipes.' });
     this.meta.updateTag({ property: 'og:type', content: 'website' });
     this.meta.updateTag({ property: 'og:url', content: 'http://localhost:4000/recipes' });
-    this.meta.updateTag({ property: 'og:site_name', content: 'NoJokeRecipe' });
+    this.meta.updateTag({ property: 'og:site_name', content: 'NoJokeRecipes' });
     this.meta.updateTag({ property: 'og:image', content: 'https://placehold.co/600x400?text=Recipes' });
 
     this.recipeService.getAllRecipes().subscribe({
