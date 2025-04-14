@@ -9,7 +9,7 @@ import {Recipe} from '../models/recipe/recipe.models';
 export class RecipeService {
   private apiUrl = typeof process !== 'undefined' && process.env['API_URL']
     ? `${process.env['API_URL']}/recipes`
-    : 'https://nojokerecipes.com/recipes';
+    : 'https://backend.nojokerecipes.com/recipes';
 
   constructor(private http: HttpClient) {}
 
