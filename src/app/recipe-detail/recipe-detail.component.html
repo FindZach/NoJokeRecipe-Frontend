@@ -24,12 +24,15 @@
 
     <section class="steps-section">
       <h2>Instructions</h2>
-      <ol class="steps-list">
+      <ul class="steps-list">
         <li *ngFor="let step of recipe.steps">
-          {{ step.instruction }}
-          <img *ngIf="step.imageUrl != null && step.imageUrl !== ''" [src]="step.imageUrl" [alt]="'Step ' + (step.stepNumber)" />
+          <div class="step-number">{{ step.stepNumber }}</div>
+          <div class="step-content">
+            {{ step.instruction }}
+            <img *ngIf="step.imageUrl != null && step.imageUrl !== ''" [src]="step.imageUrl" [alt]="'Step ' + (step.stepNumber)" />
+          </div>
         </li>
-      </ol>
+      </ul>
     </section>
 
     <section class="child-recipes-section" *ngIf="recipe.childRecipes && recipe.childRecipes.length > 0">
@@ -48,12 +51,15 @@
           </ul>
 
           <h4>Instructions</h4>
-          <ol>
+          <ul class="steps-list">
             <li *ngFor="let step of child.steps">
-              {{ step.instruction }}
-              <img *ngIf="step.imageUrl != null && step.imageUrl !== ''" [src]="step.imageUrl" [alt]="'Step ' + (step.stepNumber)" />
+              <div class="step-number">{{ step.stepNumber }}</div>
+              <div class="step-content">
+                {{ step.instruction }}
+                <img *ngIf="step.imageUrl != null && step.imageUrl !== ''" [src]="step.imageUrl" [alt]="'Step ' + (step.stepNumber)" />
+              </div>
             </li>
-          </ol>
+          </ul>
         </div>
       </div>
     </section>

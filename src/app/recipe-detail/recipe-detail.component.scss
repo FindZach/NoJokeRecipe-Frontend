@@ -72,19 +72,17 @@
     }
 
     .steps-list {
-      counter-reset: step-counter;
+      list-style-type: none; /* Remove default bullets */
+      padding: 0;
 
       li {
         margin-bottom: 2rem;
-        padding-left: 3rem;
         position: relative;
+        display: flex;
+        align-items: flex-start;
 
-        &::before {
-          counter-increment: step-counter;
-          content: counter(step-counter);
-          position: absolute;
-          left: 0;
-          top: 0;
+        .step-number {
+          flex-shrink: 0;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -94,14 +92,19 @@
           color: white;
           border-radius: 50%;
           font-weight: 600;
+          margin-right: 1rem;
         }
 
-        img {
-          margin-top: 1rem;
-          border-radius: 8px;
-          width: 100%;
-          max-width: 600px;
-          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        .step-content {
+          flex: 1;
+
+          img {
+            margin-top: 1rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+          }
         }
       }
     }
