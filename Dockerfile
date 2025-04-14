@@ -10,8 +10,12 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Build the Angular SSR app and generate sitemap
-RUN npm run build:ssr
+# Inject API_URL into environment.prod.ts if provided, otherwise use the default
+ARG API_URL=https://backend.nojokerecipes.com
+RUN if [ -n "$API_URL" ] && [ "$API_URL" != "https://backend.nojokerecipes.com" ]; then \
+      sed -i "s|apiUrl: '.*'|apiUrl: '$API_URL'|" src/environments/environment.prod.ts; \
+    fi && \
+    npm run build:ssr -- --configuration=production
 
 # Stage 2: Create the production image
 FROM node:20-slim
