@@ -1,4 +1,10 @@
 <!-- src/app/recipe-detail/recipe-detail.component.html -->
+<div class="back-nav">
+  <a [routerLink]="['/recipes']" class="back-button">
+    ← Back to Recipes
+  </a>
+</div>
+
 <div *ngIf="recipe" class="recipe-container">
   <div class="recipe-header">
     <h1>{{ recipe.title }}</h1>

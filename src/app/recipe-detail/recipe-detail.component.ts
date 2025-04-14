@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { RecipeService } from '../services/recipe.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformServer } from '@angular/common';
@@ -9,7 +9,7 @@ import {Recipe} from '../models/recipe/recipe.models';
 @Component({
   selector: 'app-recipe-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.scss']
 })
