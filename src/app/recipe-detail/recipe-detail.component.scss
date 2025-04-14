@@ -1,0 +1,44 @@
+.recipe-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+
+  h1 {
+    font-size: 2.5em;
+    color: #2c3e50;
+  }
+
+  h2, h3, h4 {
+    color: #333;
+  }
+
+  ul, ol {
+    padding-left: 20px;
+
+    li {
+      margin: 10px 0;
+
+      img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 10px;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .child-recipe {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+  }
+}
+
+.error {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  color: #d32f2f;
+  text-align: center;
+}

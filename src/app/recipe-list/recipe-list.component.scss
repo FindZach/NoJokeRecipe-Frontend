@@ -1,0 +1,42 @@
+.recipe-list-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+
+  h1 {
+    font-size: 2em;
+    color: #2c3e50;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 15px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+
+      a {
+        font-size: 1.2em;
+        color: #2c3e50;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      p {
+        margin: 5px 0 0;
+        color: #666;
+      }
+    }
+  }
+
+  .error {
+    color: #d32f2f;
+    text-align: center;
+  }
+}

@@ -1,0 +1,15 @@
+<div class="recipe-list-container">
+  <h1>Recipes</h1>
+  <div *ngIf="recipes.length > 0; else noRecipes">
+    <ul>
+      <li *ngFor="let recipe of recipes">
+        <a [routerLink]="['/recipes', recipe.slug]">{{ recipe.title }}</a>
+        <p>{{ recipe.description }}</p>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noRecipes>
+    <p>No recipes available.</p>
+  </ng-template>
+  <div *ngIf="error" class="error">{{ error }}</div>
+</div>
