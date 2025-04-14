@@ -1,0 +1,121 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="user-welcome">
+      <h1>Welcome, {{ user?.name || 'Chef' }}!</h1>
+      <p>Manage your recipes, favorites, and account settings</p>
+    </div>
+
+    <div class="quick-actions">
+      <a [routerLink]="['/recipes/new']" class="action-button primary">
+        <i class="fas fa-plus"></i> Create Recipe
+      </a>
+      <a [routerLink]="['/saved-recipes']" class="action-button secondary">
+        <i class="fas fa-bookmark"></i> Saved Recipes
+      </a>
+    </div>
+  </div>
+
+  <div class="dashboard-content" *ngIf="!loading; else loadingTemplate">
+    <div class="dashboard-grid">
+      <!-- Recipe Activity Card -->
+      <div class="dashboard-card recipe-activity">
+        <div class="card-header">
+          <h2>Recent Recipes</h2>
+          <a [routerLink]="['/recipes']" class="view-all">View All</a>
+        </div>
+
+        <div class="card-content">
+          <div class="recipe-list" *ngIf="recentRecipes.length > 0; else noRecipes">
+            <div class="recipe-item" *ngFor="let recipe of recentRecipes">
+              <div class="recipe-image"></div>
+              <div class="recipe-details">
+                <h3>{{ recipe.title }}</h3>
+                <p>{{ recipe.description | slice:0:80 }}{{ recipe.description.length > 80 ? '...' : '' }}</p>
+                <a [routerLink]="['/recipes', recipe.slug]">View Recipe</a>
+              </div>
+            </div>
+          </div>
+
+          <ng-template #noRecipes>
+            <div class="empty-state">
+              <i class="fas fa-utensils"></i>
+              <p>No recipes found. Start cooking!</p>
+              <a [routerLink]="['/recipes']" class="browse-button">Browse Recipes</a>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Favorites Card -->
+      <div class="dashboard-card favorites">
+        <div class="card-header">
+          <h2>Your Favorites</h2>
+          <a [routerLink]="['/favorites']" class="view-all">View All</a>
+        </div>
+
+        <div class="card-content">
+          <div class="favorites-list" *ngIf="favoriteRecipes.length > 0; else noFavorites">
+            <div class="favorite-item" *ngFor="let recipe of favoriteRecipes">
+              <div class="recipe-image"></div>
+              <div class="recipe-details">
+                <h3>{{ recipe.title }}</h3>
+                <a [routerLink]="['/recipes', recipe.slug]">View Recipe</a>
+              </div>
+            </div>
+          </div>
+
+          <ng-template #noFavorites>
+            <div class="empty-state">
+              <i class="fas fa-heart"></i>
+              <p>No favorite recipes yet. Find recipes you love!</p>
+              <a [routerLink]="['/recipes']" class="browse-button">Browse Recipes</a>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Account Overview Card -->
+      <div class="dashboard-card account-overview">
+        <div class="card-header">
+          <h2>Account Overview</h2>
+          <a [routerLink]="['/profile']" class="view-all">Edit Profile</a>
+        </div>
+
+        <div class="card-content">
+          <div class="user-info">
+            <div class="user-avatar">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="user-details">
+              <h3>{{ user?.name }}</h3>
+              <p>{{ user?.email }}</p>
+              <p class="member-since">Member since April 2025</p>
+            </div>
+          </div>
+
+          <div class="account-stats">
+            <div class="stat-item">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Created Recipes</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">{{ favoriteRecipes.length }}</div>
+              <div class="stat-label">Favorite Recipes</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Comments</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="loading-state">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>Loading your dashboard...</p>
+    </div>
+  </ng-template>
+</div>
