@@ -10,12 +10,8 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Inject API_URL into environment.prod.ts if provided, otherwise use the default
-ARG API_URL=https://backend.nojokerecipes.com
-RUN if [ -n "$API_URL" ] && [ "$API_URL" != "https://backend.nojokerecipes.com" ]; then \
-      sed -i "s|apiUrl: '.*'|apiUrl: '$API_URL'|" src/environments/environment.prod.ts; \
-    fi && \
-    npm run build:ssr -- --configuration=production
+# Build the Angular app for production with SSR
+RUN npm run build:ssr -- --configuration production
 
 # Stage 2: Create the production image
 FROM node:20-slim
@@ -32,5 +28,5 @@ RUN npm install --omit=dev --ignore-scripts
 # Expose the port the app runs on
 EXPOSE 4000
 
-# Command to start the SSR server
+# Command to start the SSR server in production
 CMD ["npm", "run", "serve:ssr:nojokerecipe-frontend"]
